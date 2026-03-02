@@ -169,6 +169,5 @@
       "^@/(.*)$": "<rootDir>/src/$1",
       "^@roostorg/types(.*)$": "<rootDir>/../types/$1"
     }
-  },
-  "proxy": "http://localhost:8080"
+  }
 }
