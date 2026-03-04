@@ -154,6 +154,13 @@ export class SignalsService {
 
     const pluginEntries = getIntegrationRegistry().getPluginEntries();
     const pluginSignals = loadPluginSignals(pluginEntries, signalAuthService);
+    const builtInIds = new Set(Object.keys(this.builtInSignalsByType));
+    const collision = Object.keys(pluginSignals).find((id) => builtInIds.has(id));
+    if (collision != null) {
+      throw new Error(
+        `Plugin signal type "${collision}" collides with a built-in signal; use a different signalTypeId.`,
+      );
+    }
     this.signalsByType = {
       ...this.builtInSignalsByType,
       ...pluginSignals,

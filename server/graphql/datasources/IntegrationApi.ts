@@ -48,7 +48,7 @@ function mergeManifest(
 ): TIntegrationConfigWithMetadata {
   return {
     name: integrationId,
-    apiCredential,
+    apiCredential: { ...apiCredential, name: integrationId },
     modelCard: manifest.modelCard,
     modelCardLearnMoreUrl: manifest.modelCardLearnMoreUrl,
     title: manifest.title,

@@ -27,6 +27,15 @@ export function makeCachedCredentialGetters(
       directives: { freshUntilAge: 600 },
     });
 
+  // Create built-in caches once so close() disposes the same instances in use.
+  const builtInCaches = {
+    GOOGLE_CONTENT_SAFETY_API: getApiCredentialForIntegration(
+      'GOOGLE_CONTENT_SAFETY_API',
+    ),
+    OPEN_AI: getApiCredentialForIntegration('OPEN_AI'),
+    ZENTROPI: getApiCredentialForIntegration('ZENTROPI'),
+  };
+
   const cacheByIntegrationId = new Map<string, CredentialCache>();
 
   function getForIntegrationId(integrationId: string): CredentialCache {
@@ -43,23 +52,14 @@ export function makeCachedCredentialGetters(
   }
 
   async function close(): Promise<void> {
-    const builtIn = [
-      getApiCredentialForIntegration('GOOGLE_CONTENT_SAFETY_API'),
-      getApiCredentialForIntegration('OPEN_AI'),
-      getApiCredentialForIntegration('ZENTROPI'),
-    ];
     await Promise.all([
-      ...builtIn.map(async (c) => c.close()),
+      ...Object.values(builtInCaches).map(async (c) => c.close()),
       ...Array.from(cacheByIntegrationId.values(), async (c) => c.close()),
     ]);
   }
 
   return {
-    GOOGLE_CONTENT_SAFETY_API: getApiCredentialForIntegration(
-      'GOOGLE_CONTENT_SAFETY_API',
-    ),
-    OPEN_AI: getApiCredentialForIntegration('OPEN_AI'),
-    ZENTROPI: getApiCredentialForIntegration('ZENTROPI'),
+    ...builtInCaches,
     getForIntegrationId,
     close,
   };
