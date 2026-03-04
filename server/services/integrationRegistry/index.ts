@@ -4,7 +4,7 @@
  */
 
 import {
-  BUILD_IN_MANIFESTS,
+  BUILT_IN_MANIFESTS,
   type AvailableIntegration,
   type IntegrationManifestEntry,
 } from './integrationManifests.js';
@@ -39,7 +39,7 @@ function buildRegistry(): IntegrationRegistry {
     );
   }
   const map = new Map<string, IntegrationManifestEntry>();
-  for (const [id, entry] of Object.entries(BUILD_IN_MANIFESTS)) {
+  for (const [id, entry] of Object.entries(BUILT_IN_MANIFESTS)) {
     map.set(id, entry);
   }
   for (const [id, entry] of result.manifests) {
@@ -98,7 +98,7 @@ export function getIntegrationRegistry(): IntegrationRegistry {
 }
 
 export {
-  BUILD_IN_MANIFESTS,
+  BUILT_IN_MANIFESTS,
   type AvailableIntegration,
   type IntegrationManifestEntry,
   type ModelCard,

@@ -254,7 +254,7 @@ const ZENTROPI: IntegrationManifestEntry = {
 };
 
 /** Built-in integration manifests (id -> entry). Merged with loaded plugins by the integration registry. */
-export const BUILD_IN_MANIFESTS: Readonly<
+export const BUILT_IN_MANIFESTS: Readonly<
   Record<string, IntegrationManifestEntry>
 > = {
   GOOGLE_CONTENT_SAFETY_API: GOOGLE_CONTENT_SAFETY,
@@ -263,7 +263,7 @@ export const BUILD_IN_MANIFESTS: Readonly<
 };
 
 // Validate required sections at load time
-for (const entry of Object.values(BUILD_IN_MANIFESTS)) {
+for (const entry of Object.values(BUILT_IN_MANIFESTS)) {
   assertModelCardHasRequiredSections(entry.modelCard);
 }
 

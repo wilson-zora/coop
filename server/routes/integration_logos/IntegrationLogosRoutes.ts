@@ -10,4 +10,4 @@ export default {
     route.get<undefined>('/:integrationId/with-background', serveIntegrationLogoWithBackground),
     route.get<undefined>('/:integrationId', serveIntegrationLogo),
   ],
-} as unknown as Controller;
+} as Controller;
