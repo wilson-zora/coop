@@ -1,6 +1,11 @@
 #!/bin/bash
 set -e
 
+echo "Copying lua files to transpiled output..."
+cd /workspace/server
+mkdir -p transpiled/lib/cache/stores/RedisStore/lua
+cp lib/cache/stores/RedisStore/lua/*.lua transpiled/lib/cache/stores/RedisStore/lua/
+
 echo "Running database migrations..."
 cd /workspace/.devops/migrator && npm install
 cd /workspace
