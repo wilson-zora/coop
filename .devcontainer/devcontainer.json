@@ -1,0 +1,14 @@
+{
+  "name": "Coop Demo",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "app",
+  "workspaceFolder": "/workspace",
+  "forwardPorts": [3000, 8080],
+  "postCreateCommand": "npm install && (cd client && npm install) && (cd server && npm install)",
+  "postStartCommand": ".devcontainer/start.sh",
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "24"
+    }
+  }
+}
