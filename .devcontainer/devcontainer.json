@@ -5,6 +5,11 @@
     "ghcr.io/devcontainers/features/docker-in-docker:2": {},
     "ghcr.io/devcontainers/features/node:1": { "version": "24" }
   },
+  "customizations": {
+    "vscode": {
+      "extensions": ["anthropics.claude-code"]
+    }
+  },
   "forwardPorts": [3000, 8080],
   "portsAttributes": {
     "3000": { "visibility": "public", "label": "Coop UI" },
