@@ -1,14 +1,14 @@
 {
   "name": "Coop Demo",
-  "dockerComposeFile": "docker-compose.yml",
-  "service": "app",
-  "workspaceFolder": "/workspace",
-  "forwardPorts": [3000, 8080],
-  "postCreateCommand": "npm install && (cd client && npm install) && (cd server && npm install)",
-  "postStartCommand": "bash .devcontainer/start.sh",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
   "features": {
-    "ghcr.io/devcontainers/features/node:1": {
-      "version": "24"
-    }
-  }
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+    "ghcr.io/devcontainers/features/node:1": { "version": "24" }
+  },
+  "forwardPorts": [3000, 8080],
+  "portsAttributes": {
+    "3000": { "visibility": "public", "label": "Coop UI" },
+    "8080": { "visibility": "public", "label": "Coop API" }
+  },
+  "postCreateCommand": "bash .devcontainer/setup.sh"
 }
